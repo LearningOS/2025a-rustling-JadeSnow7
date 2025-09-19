@@ -126,15 +126,17 @@ where
             return None;
         }
         
-        let next = std::mem::replace(&mut self.items[1], T::default());
+        // Move the last element to replace the root
+        self.items.swap(1, self.count);
+        let result = self.items.pop().unwrap();
         self.count -= 1;
         
+        // Restore heap property if there are still elements
         if self.count > 0 {
-            self.items.swap(1, self.count + 1);
             self.heapify_down(1);
         }
         
-        Some(next)
+        Some(result)
     }
 }
 
