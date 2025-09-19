@@ -30,8 +30,10 @@ unsafe fn modify_by_address(address: usize) {
     // TODO: Fill your safety notice of the code block below to match your
     // code's behavior and the contract of this function. You may use the
     // comment of the test below as your format reference.
+    // SAFETY: We are writing the value 0xAABBCCDD to the address,
+    // which is guaranteed to point to a valid mutable u32.
     unsafe {
-        todo!("Your code goes here")
+        *(address as *mut u32) = 0xAABBCCDD;
     }
 }
 
